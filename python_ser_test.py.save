@@ -1,0 +1,9 @@
+import serial
+import time
+from time import *
+ser = serial.Serial('/dev/ttyAMA0',4800)
+phoneNum = input()
+print("sending at"+phoneNum)
+ser.write(b"ATD+"+phoneNum+";\r")
+print("call being made")
+
