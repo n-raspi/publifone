@@ -15,15 +15,15 @@ outputs = [DigitalOutputDevice(5, active_high=True),
            DigitalOutputDevice(26, active_high=True)]
 
 inputVal = [["top1","top2",None , None ,"top3"],
-            ["circ","vol","*","#",0],
-            ["bott","cont",7,9,8],
-            ["left","right",4,6,5],
-            ["top","L",1,3,2]]
+            ["circ","vol","*","#","0"],
+            ["bott","cont","7","9","8"],
+            ["left","right","4","6","5"],
+            ["top","L","1","3","2"]]
 
 
 
 def dialIn(inter, interVal):
-    outputString = [] 
+    outputString  = ""
     i,j = 0,0
     counter = 0
 
@@ -33,7 +33,7 @@ def dialIn(inter, interVal):
             for j in range (len(inputs)):
                 if inputs[j].value:
                     #outputString = outputString + str(inputVal[j][i])
-                    outputString.append(inputVal[j][i])
+                    outputString = outputString + inputVal[j][i]
                     print(i," ",j, " " , inputVal[j][i], " ",counter," ",outputString)
                     sleep(0.2)
                     inputs[j].wait_for_inactive(timeout=2)
