@@ -34,7 +34,7 @@ def dialIn():
             outputs[i].on()
             for j in range (len(inputs)):
                 if inputs[j].value:
-                    outputString =[inputVal [j][i],inputTyp[j][i],j] 
+                    outputString =[inputVal [j][i],inputTyp[j][i]] 
                     print(i," ",j, " " , inputVal[j][i], " ")
                     inputs[j].wait_for_inactive(timeout=2)
                     sleep(0.2)
