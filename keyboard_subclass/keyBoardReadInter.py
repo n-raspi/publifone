@@ -35,6 +35,7 @@ def dialIn(inter, interVal):
                     #outputString = outputString + str(inputVal[j][i])
                     outputString = outputString + inputVal[j][i]
                     print(i," ",j, " " , inputVal[j][i], " ",counter," ",outputString)
+                    outputs[i].off()
                     sleep(0.2)
                     inputs[j].wait_for_inactive(timeout=2)
                     counter+=1
