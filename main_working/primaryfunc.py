@@ -19,15 +19,15 @@ def CPTONE(toneVal): #might have to move close to keyboard for immediate tone
     ser.write(b"AT+CPTONE="+toneVal.encode()+b";\r")
     print("tone: " , toneVal)
         
-def VERIFY():
+def VERIFY(): #main verifying function
     #return True
     #return False
-    if len(phoneNum) < 5:
+    if len(phoneNum) < 5: #test check
         return True
     else:
         return "call"
 
-def CALL():
+def CALL(): #make phone call
     ser.write(b"ATD"+phoneNum.encode()+b";\r")
     print("calling: " , phoneNum)
     handsetSens.wait_for_active()
@@ -35,26 +35,26 @@ def CALL():
 
 
 def main(): 
-    while(1):
+    while(1): #runs indefinitely, currently just call mode
         global phoneNum
         while (handsetSens.value==0):
-            dialVals = dialIn()
-            if(dialVals[1] == "num"):
-                CPTONE(dialVals[0])
+            dialVals = dialIn(handsetSens, 1) #passes hangup to end sample on hangup
+            if(dialVals[1] == "num" or dialVals[1] == "spec"):
+                CPTONE(dialVals[0]) #see function comment
                 phoneNum = phoneNum + dialVals[0]
                 print("phone: ", phoneNum)
-                verifOut = VERIFY()
+                verifOut = VERIFY() 
                 if(verifOut == False):
                    pass 
                 elif(verifOut == True):
                     pass
                 elif(verifOut == "call"):
                     CALL()
-            elif(dialVals[1] == "spec"):
-                pass
+                    
             elif(dialVals[1] == "com"):
                 pass
-            elif(dialVals[1] == None):
+            
+            elif(dialVals[1] == None): #ambiguous, could be errounous pressing of unindexed button or hangup
                 pass
         phoneNum = ""
 

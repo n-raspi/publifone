@@ -1,6 +1,8 @@
 ##from gpiozero import DigitalInputDevice
 from gpiozero import *
 from time import sleep
+
+
  
 inputs =  [DigitalInputDevice(4, pull_up=False),
            DigitalInputDevice(17, pull_up=False),
@@ -27,9 +29,9 @@ inputTyp = [["com","com", None, None, "com"],
         ["com","com","num","num","num"]]
 
 
-def dialIn():
+def dialIn(inter, interVal):
     i,j = 0,0
-    while 1:
+    while inter.value != interVal:
         for i in range(len(outputs)):
             outputs[i].on()
             for j in range (len(inputs)):
@@ -42,3 +44,12 @@ def dialIn():
                     return outputString
                     
             outputs[i].off()
+    
+    for k in range(len(outputs)):
+        outputs[k].off()
+    return None
+
+if __name__ == "__main__":
+    handsetSens = DigitalInputDevice(16, pull_up=False)
+    while 1:
+        print(dialIn(handsetSens,1))
