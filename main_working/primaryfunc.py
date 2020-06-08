@@ -26,7 +26,6 @@ def main():
         while (handsetSens.value==0):
             dialVals = dialIn(handsetSens, 1) #passes hangup to end sample on hangup
             if(dialVals[1] == "num" or dialVals[1] == "spec"):
-                CPTONE(dialVals[0]) #see function comment
                 phoneNum = phoneNum + dialVals[0]
                 print("phone: ", phoneNum)
                 verifOut = VERIFY(phoneNum) 

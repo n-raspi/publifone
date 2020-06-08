@@ -1,7 +1,7 @@
 ##from gpiozero import DigitalInputDevice
 from gpiozero import *
 from time import sleep
-
+from fonafuncs import *
 
  
 inputs =  [DigitalInputDevice(4, pull_up=False),
@@ -38,8 +38,10 @@ def dialIn(inter, interVal):
                 if inputs[j].value:
                     outputString =[inputVal [j][i],inputTyp[j][i]] 
                     print(i," ",j, " " , inputVal[j][i], " ")
+                    if inputTyp[j][i] == "spec" or inputTyp[j][i] == "num":
+                        CPTONE(inputVal[j][i])
                     inputs[j].wait_for_inactive(timeout=2)
-                    sleep(0.2)
+                    sleep(0.15)
                     outputs[i].off()
                     return outputString
                     
