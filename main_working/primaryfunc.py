@@ -6,32 +6,18 @@ import threading
 import serial
 import re
 
+from fonafuncs import *
+
 from gpiozero import *
 from time import *
 
-ser = serial.Serial('/dev/ttyAMA0',4800)
+
 #ser.write(b"ATD"+phoneNum.encode()+b";\r")
 
 handsetSens = DigitalInputDevice(16, pull_up=False)
 phoneNum = ""
 
-def CPTONE(toneVal): #might have to move close to keyboard for immediate tone
-    ser.write(b"AT+CPTONE="+toneVal.encode()+b";\r")
-    print("tone: " , toneVal)
-        
-def VERIFY(): #main verifying function
-    #return True
-    #return False
-    if len(phoneNum) < 5: #test check
-        return True
-    else:
-        return "call"
 
-def CALL(): #make phone call
-    ser.write(b"ATD"+phoneNum.encode()+b";\r")
-    print("calling: " , phoneNum)
-    handsetSens.wait_for_active()
-    ser.write(b"AT+CHUP")
 
 
 def main(): 
@@ -43,18 +29,25 @@ def main():
                 CPTONE(dialVals[0]) #see function comment
                 phoneNum = phoneNum + dialVals[0]
                 print("phone: ", phoneNum)
-                verifOut = VERIFY() 
+                verifOut = VERIFY(phoneNum) 
                 if(verifOut == False):
                    pass 
                 elif(verifOut == True):
                     pass
                 elif(verifOut == "call"):
-                    CALL()
-                    
+                    CALL(phoneNum, handsetSens)
             elif(dialVals[1] == "com"):
-                pass
-            
-            elif(dialVals[1] == None): #ambiguous, could be errounous pressing of unindexed button or hangup
+                if(dialVals[0] == "top1"):
+                    phoneNum = phoneNum[:-1]
+                if(dialVals[0] == "top2"):
+                    phoneNum = ""
+                if(dialVals[0] == "top3"):
+                    CALL()
+            elif(dialVals == "cancel"):
+                print("cancelled")
+            elif(dialVals[1] == None): #just unindexed button
                 pass
         phoneNum = ""
 
+if __name__ == "__main__":
+    main()

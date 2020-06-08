@@ -47,9 +47,8 @@ def dialIn(inter, interVal):
     
     for k in range(len(outputs)):
         outputs[k].off()
-    return None
+    return "cancel"
 
 if __name__ == "__main__":
     handsetSens = DigitalInputDevice(16, pull_up=False)
-    while 1:
-        print(dialIn(handsetSens,1))
+    print(dialIn(handsetSens,1))
