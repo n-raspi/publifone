@@ -11,6 +11,9 @@ from fonafuncs import *
 from gpiozero import *
 from time import *
 
+from swissnumbers import updateLists
+from swissnumbers import VERIFY
+
 
 #ser.write(b"ATD"+phoneNum.encode()+b";\r")
 
@@ -25,22 +28,25 @@ def main():
         global phoneNum
         while (handsetSens.value==0):
             dialVals = dialIn(handsetSens, 1) #passes hangup to end sample on hangup
+            
             if(dialVals[1] == "num" or dialVals[1] == "spec"):
                 phoneNum = phoneNum + dialVals[0]
                 print("phone: ", phoneNum)
                 verifOut = VERIFY(phoneNum) 
+                
                 if(verifOut == False):
-                   pass 
+                   phoneNum = phoneNum[:-1] 
                 elif(verifOut == True):
                     pass
                 elif(verifOut == "call"):
                     CALL(phoneNum, handsetSens)
+                    
             elif(dialVals[1] == "com"):
                 if(dialVals[0] == "top1"):
                     phoneNum = phoneNum[:-1]
-                if(dialVals[0] == "top2"):
+                if(dialVals[0] == "top2 "):
                     phoneNum = ""
-                if(dialVals[0] == "top3"):
+                if(dialVals[0] == "top3"): #force call for: short numbers, int numbers
                     CALL()
             elif(dialVals == "cancel"):
                 print("cancelled")
@@ -49,4 +55,5 @@ def main():
         phoneNum = ""
 
 if __name__ == "__main__":
+    updateLists()
     main()

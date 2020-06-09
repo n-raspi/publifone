@@ -41,8 +41,8 @@ def dialIn(inter, interVal):
                     if inputTyp[j][i] == "spec" or inputTyp[j][i] == "num":
                         CPTONE(inputVal[j][i])
                     inputs[j].wait_for_inactive(timeout=2)
-                    sleep(0.15)
                     outputs[i].off()
+                    sleep(0.15)
                     return outputString
                     
             outputs[i].off()
@@ -53,4 +53,6 @@ def dialIn(inter, interVal):
 
 if __name__ == "__main__":
     handsetSens = DigitalInputDevice(16, pull_up=False)
-    print(dialIn(handsetSens,1))
+    #print(dialIn(handsetSens,1))
+    while 1:
+        dialIn(handsetSens,1)
