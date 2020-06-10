@@ -42,7 +42,7 @@ def dialIn(inter, interVal):
                         CPTONE(inputVal[j][i])
                     inputs[j].wait_for_inactive(timeout=2)
                     outputs[i].off()
-                    sleep(0.15)
+                    sleep(0.2)
                     return outputString
                     
             outputs[i].off()
