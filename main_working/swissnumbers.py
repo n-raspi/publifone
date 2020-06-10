@@ -24,15 +24,15 @@ def VERIFY(phoneNum):
                         return True
                 elif (phoneLen >= 3 and (phoneNum[4:7] == natdestcodes[i] or phoneNum[4:6] == natdestcodes[i])): #should be full match
                     print("swiss NDC1: ", natdestcodes[i])
-                    if(phoneLen == 13):
+                    if(phoneLen == 9):
                         return "call"        
                     return True
             return False
         else:
-            #handling for intnl number
+            #handling for other intnl numbers
             return True
             
-    elif phoneNum[:1] == "1":
+    elif phoneNum[:1] == "1": #SHORTCODES handling
         i=0
         for i in range(len(shortcodes)):
             if phoneNum == shortcodes[i]:
