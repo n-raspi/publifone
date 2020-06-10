@@ -44,7 +44,7 @@ def main():
             elif(dialVals[1] == "com"):
                 if(dialVals[0] == "top1"):
                     phoneNum = phoneNum[:-1]
-                if(dialVals[0] == "top2 "):
+                if(dialVals[0] == "top2"):
                     phoneNum = ""
                 if(dialVals[0] == "top3"): #force call for: short numbers, int numbers
                     CALL()
