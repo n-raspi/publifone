@@ -63,6 +63,6 @@ def simpleOut(inputStr):
     ser.reset_input_buffer()
     
 if __name__ == "__main__":
-    print(scir("ATD+447447571213;",3))
-    sleep(20)
-    print(scir("AT+CHUP",5))
+#     print(scir("ATD+447447571213;",3))
+#     sleep(20)
+#     print(scir("AT+CHUP",5))
