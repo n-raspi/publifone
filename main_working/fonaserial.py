@@ -3,7 +3,7 @@ from serial import *
 import time
 from time import *
 val = 0
-serTO = 0.5
+serTO = 0.1
 ser = serial.Serial('/dev/ttyAMA0',4800, timeout = serTO)
 #ser.write(b"ATE0\r")
 #ser.flush()
@@ -17,6 +17,7 @@ def scir(inputStr,timeout):
     if int(ser.inWaiting()) != 0:
         #print(ser.read(255).decode())
         buffer.append(True)
+        #buffer.append(crclear())
         buffer.append(crclear())
         ser.reset_input_buffer()
     else:
@@ -29,7 +30,7 @@ def scir(inputStr,timeout):
 #check immediate then within timeout since last timeout
 #adds to parametered buffer
 def cr(timeout, buffer): #check reply 
-    if(timeout == None): timeout = 40
+    if(timeout == None): timeout = 10
     for j in range(int(timeout/serTO)):
         ser.read_until(b"\r\n")#ignore first \r\n
         val = ser.read_until(b"\r\n")[:-2].decode()
@@ -45,7 +46,7 @@ def cr(timeout, buffer): #check reply
             #print(val)
             j = 0
 
-#returns current buffer
+#returns and clears current buffer
 def crclear(): #check reply
     buffer = []
     for j in range(255):
@@ -63,6 +64,7 @@ def simpleOut(inputStr):
     ser.reset_input_buffer()
     
 if __name__ == "__main__":
+    pass
 #     print(scir("ATD+447447571213;",3))
 #     sleep(20)
 #     print(scir("AT+CHUP",5))
