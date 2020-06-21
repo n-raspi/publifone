@@ -17,7 +17,7 @@ from swissnumbers import VERIFY
 
 #ser.write(b"ATD"+phoneNum.encode()+b";\r")
 
-handsetSens = DigitalInputDevice(16, pull_up=False)
+handsetSens = DigitalInputDevice(16, pull_up=False, bounce_time=0.05)
 
 
 def callhandle(phoneNum, handsetSens):
@@ -28,7 +28,7 @@ def callhandle(phoneNum, handsetSens):
             interVal = cr(1)
             if interVal:
                 print(interVal)
-        return
+        HANGUP()
     else:
         print("failed")
 def main():
@@ -48,7 +48,6 @@ def main():
                     pass
                 elif(verifOut == "call"):
                     callhandle(phoneNum, handsetSens)
-                    
             elif(dialVals[1] == "com"):
                 if(dialVals[0] == "top1"):
                     phoneNum = phoneNum[:-1]
@@ -65,6 +64,7 @@ def main():
 if __name__ == "__main__":
     #updateLists()
     #print(GETBAT())
-    print(callhandle("+41791384875", handsetSens))
+    callhandle("+41791384875", handsetSens)
     #callhandle("+447447571213", handsetSens)
+    
     #main()

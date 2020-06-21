@@ -29,12 +29,7 @@ def scir(inputStr,timeout):
     buffer.append(cr(timeout))
     return buffer
 
-
-def crn(timeout):
-    while(1):
-        val = ser.read_until(b"\r\n")
-        if val: print(val)
-        sleep(0.1)
+        
 #check immediate then within timeout since last timeout
 #adds to parametered buffer
 def cr(timeout): #check reply
@@ -50,8 +45,13 @@ def cr(timeout): #check reply
         
         if not val:
             #print("pass")
-            pass
-        elif val == "OK" or val == "ERROR":
+            j += 1
+            continue
+        if(val[-1:] == "\r"):
+            print("asdf")
+            val = val[:-1]
+            
+        if val == "OK" or val == "ERROR":
             #print("it's an ok")
             buffer.append(val)
             #print(val)

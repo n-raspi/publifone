@@ -40,10 +40,20 @@ def INITCALL(phoneNum): #make phone call
     callInter = scir(f"ATD{phoneNum};",1)
     if callInter[0]:
         HANDLE(callInter[1])
-    #print(callInter)
+    print(callInter)
     if callInter[2][1] == "OK":
         return True
     else: return False
+
+def HANGUP():
+    hangInter = scir("AT+CHUP",1)
+    print(hangInter)
+    if hangInter[0]:
+        HANDLE(hangInter[1])
+    if callInter[2][1] == "OK":
+        return True
+    else:
+        return False
     
 def GETBAT():
     batInter = scir("AT+CBC",2)
