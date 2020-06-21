@@ -18,28 +18,36 @@ from swissnumbers import VERIFY
 #ser.write(b"ATD"+phoneNum.encode()+b";\r")
 
 handsetSens = DigitalInputDevice(16, pull_up=False)
-phoneNum = ""
 
 
-
-
-def main(): 
+def callhandle(phoneNum, handsetSens):
+    if(INITCALL(phoneNum) == True):
+        print("call true")
+        while(handsetSens.value==0):
+            #print("checking")
+            interVal = cr(1)
+            if interVal:
+                print(interVal)
+        return
+    else:
+        print("failed")
+def main():
+    phoneNum = ""
     while(1): #runs indefinitely, currently just call mode
-        global phoneNum
+        
         while (handsetSens.value==0):
             dialVals = dialIn(handsetSens, 1) #passes hangup to end sample on hangup
-            
             if(dialVals[1] == "num" or dialVals[1] == "spec"):
                 phoneNum = phoneNum + dialVals[0]
                 print("phone: ", phoneNum)
                 verifOut = VERIFY(phoneNum) 
-                
+                 
                 if(verifOut == False):
                    phoneNum = phoneNum[:-1] 
                 elif(verifOut == True):
                     pass
                 elif(verifOut == "call"):
-                    CALL(phoneNum, handsetSens)
+                    callhandle(phoneNum, handsetSens)
                     
             elif(dialVals[1] == "com"):
                 if(dialVals[0] == "top1"):
@@ -47,7 +55,7 @@ def main():
                 if(dialVals[0] == "top2"):
                     phoneNum = ""
                 if(dialVals[0] == "top3"): #force call for: short numbers, int numbers
-                    CALL()
+                    callhandle(phoneNum, handsetSens)
             elif(dialVals == "cancel"):
                 print("cancelled")
             elif(dialVals[1] == None): #just unindexed button
@@ -55,5 +63,8 @@ def main():
         phoneNum = ""
 
 if __name__ == "__main__":
-    updateLists()
-    main()
+    #updateLists()
+    #print(GETBAT())
+    print(callhandle("+41791384875", handsetSens))
+    #callhandle("+447447571213", handsetSens)
+    #main()

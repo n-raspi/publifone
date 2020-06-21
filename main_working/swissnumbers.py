@@ -90,4 +90,4 @@ def updateLists():
 if __name__ == "__main__":
     updateLists()
     print(natdestcodes)
-    print(VERIFY("004179")) # test code
+    print(VERIFY("0041787976498")) # test code

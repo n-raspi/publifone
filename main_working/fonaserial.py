@@ -15,6 +15,7 @@ ser.reset_input_buffer()
 def scir(inputStr,timeout): 
     buffer = []
     if int(ser.inWaiting()) != 0:
+        #print("inwaiting")
         #print(ser.read(255).decode())
         buffer.append(True)
         #buffer.append(crclear())
@@ -25,26 +26,43 @@ def scir(inputStr,timeout):
         buffer.append(None) 
     ser.write(inputStr.encode() + b"\r")
     ser.flush()
-    return cr(timeout, buffer)
+    buffer.append(cr(timeout))
+    return buffer
 
+
+def crn(timeout):
+    while(1):
+        val = ser.read_until(b"\r\n")
+        if val: print(val)
+        sleep(0.1)
 #check immediate then within timeout since last timeout
 #adds to parametered buffer
-def cr(timeout, buffer): #check reply 
+def cr(timeout): #check reply
+    #print("new")
+    buffer = []
     if(timeout == None): timeout = 10
-    for j in range(int(timeout/serTO)):
-        ser.read_until(b"\r\n")#ignore first \r\n
+    j = 0
+    while j < int(timeout/serTO):
+        #print(ser.inWaiting())
+        #print(f"going{j}")
+        #ser.read_until(b"\r\n")#ignore echo AND first \r\n
         val = ser.read_until(b"\r\n")[:-2].decode()
+        
         if not val:
+            #print("pass")
             pass
-            #print("None")
         elif val == "OK" or val == "ERROR":
+            #print("it's an ok")
             buffer.append(val)
             #print(val)
             return buffer
         else:
             buffer.append(val)
-            #print(val)
+            #print("reset count!")
             j = 0
+            continue
+        j +=1
+    return buffer
 
 #returns and clears current buffer
 def crclear(): #check reply
@@ -65,6 +83,6 @@ def simpleOut(inputStr):
     
 if __name__ == "__main__":
     pass
-#     print(scir("ATD+447447571213;",3))
-#     sleep(20)
-#     print(scir("AT+CHUP",5))
+#     scir("ATD+447447571213;",3)
+#     sleep(2)
+#     scir("AT+CHUP",5)
