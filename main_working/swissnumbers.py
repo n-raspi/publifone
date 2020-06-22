@@ -18,12 +18,12 @@ def VERIFY(phoneNum):
                 if (phoneLen == 1) or (phoneLen == 2): #if 07 or 080 match 7 or 80 to the beginning of every NDC
                     if re.findall(rf"^{phoneNum[4:]}",natdestcodes[i]):
                         if ((phoneLen) == len(natdestcodes[i])): #if match AND same length, full NDC match
-                             print("swiss NDC0: ", natdestcodes[i])
+                             print("swiss NDCINTL: ", natdestcodes[i])
                         else:
                             print("start of: ", natdestcodes[i])  #else just beginning match
                         return True
                 elif (phoneLen >= 3 and (phoneNum[4:7] == natdestcodes[i] or phoneNum[4:6] == natdestcodes[i])): #should be full match
-                    print("swiss NDC1: ", natdestcodes[i])
+                    print("swiss NDCLCL: ", natdestcodes[i])
                     if(phoneLen == 9):
                         return "call"        
                     return True
@@ -38,8 +38,10 @@ def VERIFY(phoneNum):
             if phoneNum == shortcodes[i]:
                 return True
                 #return callable #short code callable but should not call by default
-            if re.findall(rf"^{phoneNum}",shortcodes[i]):
+            elif re.findall(rf"^{phoneNum}",shortcodes[i]):
                 return True
+            else:
+                return False
             
             
     elif phoneNum[:1] == "0": #handling local phone number, stable-ish

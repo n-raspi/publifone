@@ -7,7 +7,29 @@ serTO = 0.5 #this solved the cutoff of command return
 ser = serial.Serial('/dev/ttyAMA0',4800, timeout = serTO)
 #ser.write(b"ATE0\r")
 #ser.flush()
+
+toneEq = {
+    "0":"10",
+    "1":"1",
+    "2":"2",
+    "3":"3",
+    "4":"4",
+    "5":"5",
+    "6":"6",
+    "7":"7",
+    "8":"8",
+    "9":"9",
+    "#":"15",
+    "*":"16"
+    }
+
 ser.reset_input_buffer()
+
+def CPTONE(toneVal): 
+    ser.write(b"AT+CPTONE="+toneEq[toneVal].encode()+b"\r\n")
+    ser.flush()
+    ser.reset_input_buffer()
+    #print("tone: " , toneVal)
 
 #returns True and extra array entry 
 #send command and check immediate response
@@ -39,7 +61,7 @@ def cr(timeout): #check reply
         if not val: #count up on timeout if there's no reply or if it is just \r\n
             j += 1
             continue
-        print(val)
+        #print(val)
         if(val[-1:] == "\r"): #remove \r which appears at the end of commands
             val = val[:-1]
 #         if val == "OK" or val == "ERROR": #better to handle in handle functions

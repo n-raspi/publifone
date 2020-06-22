@@ -6,6 +6,8 @@ import threading
 import serial
 import re
 
+from fonaserial import *
+
 from fonafuncs import *
 
 from gpiozero import *
@@ -22,7 +24,7 @@ handsetSens = DigitalInputDevice(16, pull_up=False, bounce_time=0.05)
 
 def callhandle(phoneNum, handsetSens):
     if(INITCALL(phoneNum) == True):
-        print("call true")
+        print("call init")
         while(handsetSens.value==0):
             #print("checking")
             interVal = cr(1)
@@ -39,11 +41,12 @@ def main():
             dialVals = dialIn(handsetSens, 1) #passes hangup to end sample on hangup
             if(dialVals[1] == "num" or dialVals[1] == "spec"):
                 phoneNum = phoneNum + dialVals[0]
-                print("phone: ", phoneNum)
+                #print("phone: ", phoneNum)
                 verifOut = VERIFY(phoneNum) 
                  
                 if(verifOut == False):
-                   phoneNum = phoneNum[:-1] 
+                   phoneNum = phoneNum[:-1]
+                   
                 elif(verifOut == True):
                     pass
                 elif(verifOut == "call"):
@@ -51,18 +54,23 @@ def main():
             elif(dialVals[1] == "com"):
                 if(dialVals[0] == "top1"):
                     phoneNum = phoneNum[:-1]
+                    
                 if(dialVals[0] == "top2"):
                     phoneNum = ""
+                    #print("phone: ", phoneNum)
                 if(dialVals[0] == "top3"): #force call for: short numbers, int numbers
+                    print("force call")
                     callhandle(phoneNum, handsetSens)
             elif(dialVals == "cancel"):
                 print("cancelled")
             elif(dialVals[1] == None): #just unindexed button
                 pass
+            print("phone: ", phoneNum)
         phoneNum = ""
 
 if __name__ == "__main__":
     updateLists()
+    #print(GETBAT())
     main()
 
 

@@ -37,7 +37,7 @@ def dialIn(inter, interVal):
             for j in range (len(inputs)):
                 if inputs[j].value:
                     outputString =[inputVal [j][i],inputTyp[j][i]] 
-                    print(i," ",j, " " , inputVal[j][i], " ")
+                    #print(i," ",j, " " , inputVal[j][i], " ")
                     if inputTyp[j][i] == "spec" or inputTyp[j][i] == "num":
                         CPTONE(inputVal[j][i])
                     inputs[j].wait_for_inactive(timeout=2)

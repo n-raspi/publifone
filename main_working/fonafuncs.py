@@ -8,25 +8,6 @@ from fonaserial import *
 
 ser = serial.Serial('/dev/ttyAMA0',4800)
 
-toneEq = {
-    "0":"10",
-    "1":"1",
-    "2":"2",
-    "3":"3",
-    "4":"4",
-    "5":"5",
-    "6":"6",
-    "7":"7",
-    "8":"8",
-    "9":"9",
-    "#":"15",
-    "*":"16"
-    }
-
-def CPTONE(toneVal): 
-    ser.write(b"AT+CPTONE="+toneEq[toneVal].encode()+b"\r\n")
-    print("tone: " , toneVal)
-        
 
 
 def CALL(phoneNum,inter): #make phone call (too simple)
@@ -56,7 +37,7 @@ def HANGUP():
         return False
     
 def GETBAT():
-    batInter = scir("AT+CBC",2)
+    batInter = scir("AT+CBC",1)
     if batInter[0]:
         HANDLE(batInter[1])
     #print(batInter)
