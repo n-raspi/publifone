@@ -70,8 +70,5 @@ def main():
 
 if __name__ == "__main__":
     updateLists()
-    #print(GETBAT())
-    main()
-
-
-    
+    print(GETBAT())
+    #main()
