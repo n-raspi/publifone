@@ -46,11 +46,11 @@ def INITCALL(phoneNum): #make phone call
     else: return False
 
 def HANGUP():
-    hangInter = scir("AT+CHUP",1)
+    hangInter = scir("AT+CHUP",2)
     print(hangInter)
     if hangInter[0]:
         HANDLE(hangInter[1])
-    if callInter[2][1] == "OK":
+    if hangInter[2][1] == "OK" or hangInter[2][2] == "OK":
         return True
     else:
         return False

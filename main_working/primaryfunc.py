@@ -62,9 +62,8 @@ def main():
         phoneNum = ""
 
 if __name__ == "__main__":
-    #updateLists()
-    #print(GETBAT())
-    callhandle("+41791384875", handsetSens)
-    #callhandle("+447447571213", handsetSens)
+    updateLists()
+    main()
+
+
     
-    #main()
