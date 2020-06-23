@@ -1,3 +1,4 @@
+check
 all responses format: \r for <cr> \n for <lf>
 	format: \r\n <message> \r\n
 ATE0 - disable echo
