@@ -16,6 +16,8 @@ from time import *
 from swissnumbers import updateLists
 from swissnumbers import VERIFY
 
+from lcdcontrol import *
+
 
 #ser.write(b"ATD"+phoneNum.encode()+b";\r")
 
