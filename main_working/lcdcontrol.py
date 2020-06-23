@@ -53,6 +53,7 @@ def phone(phoneNum):
     refresh()
 
 if __name__ == "__main__":
+    waitscreen()
     Clock = pygame.time.Clock()
     prevNum = "0"
     for i in range(10):
