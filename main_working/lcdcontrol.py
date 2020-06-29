@@ -10,6 +10,7 @@ white = (255,255,255)
 red = (255,0,0)
 green = (0,255,0)
 blue = (0,0,255)
+specblue = (161,223,237)
 
 surfaceSize = (480,320)
 swissSize = (200,200)
@@ -19,7 +20,7 @@ pygame.font.init()
 #pygame.mouse.set_visible(False)
 
 lcd = pygame.Surface(surfaceSize)
-myfont = pygame.font.SysFont('Arial',20)
+myfont = pygame.font.SysFont('Arial',25)
 
 
 
@@ -37,14 +38,27 @@ def toblack():
     refresh()
 def blank():
     lcd.fill(white)
-    pygame.draw.rect(lcd, (161,223,237), (0,280,480,40))
+    pygame.draw.rect(lcd, specblue, (0,270,480,50))
+    pygame.draw.rect(lcd, specblue, (0,0,480,40))
+    
+    pygame.draw.line(lcd, white, (130,310),(130,320), 3)
+    pygame.draw.line(lcd, white, (240,310),(240,320), 3)
+    pygame.draw.line(lcd, white, (350,310),(350,320), 3)
+    
     t = time.localtime()
     texttime = myfont.render(time.strftime("%H:%M",t),False, (255,255,255))
-    lcd.blit(texttime,(420,290))
+    lcd.blit(texttime,(200,5))
+    
+    calltext = myfont.render("Call",False, (255,255,255))
+    lcd.blit(calltext,(110,275))
+    deltext = myfont.render("Delete",False, (255,255,255))
+    lcd.blit(deltext,(210,275))
+    cleartext = myfont.render("Clear",False, (255,255,255))
+    lcd.blit(cleartext,(320,275))
     refresh()
 def waitscreen():
     blank()
-    lcd.blit(picture, ((surfaceSize[0]/2)-(swissSize[0]/2),20))
+    lcd.blit(picture, ((surfaceSize[0]/2)-(swissSize[0]/2),50))
     refresh()
 
 def phone(phoneNum):
