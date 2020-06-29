@@ -16,7 +16,7 @@ from time import *
 from swissnumbers import updateLists
 from swissnumbers import VERIFY
 
-from lcdcontrol import *
+#from lcdcontrol import *
 
 
 #ser.write(b"ATD"+phoneNum.encode()+b";\r")
@@ -72,5 +72,5 @@ def main():
 
 if __name__ == "__main__":
     updateLists()
-    print(GETBAT())
-    #main()
+    #print(GETBAT())
+    main()

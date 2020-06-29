@@ -37,14 +37,14 @@ def dialIn(inter, interVal):
             for j in range (len(inputs)):
                 if inputs[j].value:
                     outputString =[inputVal [j][i],inputTyp[j][i]] 
-                    #print(i," ",j, " " , inputVal[j][i], " ")
+                    print(i," ",j, " " , inputVal[j][i], " ")
                     if inputTyp[j][i] == "spec" or inputTyp[j][i] == "num":
+                        #pass
                         CPTONE(inputVal[j][i])
                     inputs[j].wait_for_inactive(timeout=2)
                     outputs[i].off()
                     sleep(0.2)
                     return outputString
-                    
             outputs[i].off()
     
     for k in range(len(outputs)):
@@ -56,3 +56,4 @@ if __name__ == "__main__":
     #print(dialIn(handsetSens,1))
     while 1:
         dialIn(handsetSens,1)
+        print("go")
