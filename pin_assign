@@ -1,8 +1,10 @@
+Set of pins used for keypad (excluding J2): (4,5,6,7,8,10,11,12,13,14) =  10 pins
+
 top1	4&10
 top2	4&11
 top3	4&14  
 
-@@hangup 8&9
+(hangup 8&9)
 top	8&10
 L	8&11
 left	7&10
@@ -24,3 +26,10 @@ vol	5&11
 0	5&14
 hash	5&13
 star	5&12
+ Total: 23 buttons
+Other inputs:
+- Card detect
+- Card button
+- Hangup
+
+= total: 13 GPIO pins needed
