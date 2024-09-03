@@ -1,4 +1,7 @@
-Set of pins used for keypad (excluding J2): (4,5,6,7,8,10,11,12,13,14) =  10 pins
+Set of molex pins for keypad (excluding J2): (4,5,6,7,8,10,11,12,13,14) 
+=  10 pins (4,17,27,22,23,5,6,13,19,26)
+
++ 3 (24,16,20,21)
 
 top1	4&10
 top2	4&11
