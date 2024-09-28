@@ -36,28 +36,18 @@ def main():
     i2cbus.write_byte_data(i2caddress, IOCON, 0x02)  # Update configuration register
 
     i2cbus.write_word_data(i2caddress, IODIRA, 0xFF00)  # Set Port A as outputs and Port B as inputs
-
+    
+    i2cbus.write_byte_data(i2caddress, GPPUB, 0x1F)  # Set GPIOB0 - GPIOB4 to pull up
+    
+    i2cbus.write_byte_data(i2caddress, GPIOA, 0x1F)  # Set GPIOA0 - GPIOA4 to high
+    
+	
     while (True):
         # ~ portb = i2cbus.read_byte_data(i2caddress, GPIOB)  # Read the value of Port B
-        # ~ print(portb) # print the value of Port B
+        # ~ i2cbus.write_byte_data(i2caddress, GPIOA, 0x02)  # Set pin 1 to on
         
-        i2cbus.write_byte_data(i2caddress, GPPUB, 0x01)  # Set GPB0 pull up to 1
-        time.sleep(0.5)  # Wait 500ms
 
-        i2cbus.write_byte_data(i2caddress, GPIOA, 0x02)  # Set pin 1 to on
-        time.sleep(0.5)  # Wait 500ms
 
-        i2cbus.write_byte_data(i2caddress, GPIOA, 0x00)  # Set pin 1 to off
-        time.sleep(0.5)  # Wait 500ms
-        
-        i2cbus.write_byte_data(i2caddress, GPIOA, 0x03)  # Set pin 1 to on
-        time.sleep(0.5)  # Wait 500ms
-
-        i2cbus.write_byte_data(i2caddress, GPIOA, 0x00)  # Set pin 1 to off
-        time.sleep(0.5)  # Wait 500ms
-        
-        i2cbus.write_byte_data(i2caddress, GPPUB, 0x00)  # Set GPB0 pull up to 0
-        time.sleep(1)  # Wait 500ms
 
 
 if __name__ == "__main__":
