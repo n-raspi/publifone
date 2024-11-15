@@ -1,3 +1,0 @@
-echo "dtoverlay=disable-bt" | sudo tee -a /boot/firmware/config.txt
-sudo systemctl disable hciuart
-sudo reboot
