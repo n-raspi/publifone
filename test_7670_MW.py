@@ -177,3 +177,5 @@ while True:
     
     send_at(HTTPHEAD, 'OK', timeout=5)
     
+    time.sleep(600)
+    
