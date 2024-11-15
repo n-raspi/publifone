@@ -149,6 +149,8 @@ def setup():
 
 while True:
     
+    send_at("AT+HTTPINIT", 'OK', timeout=5)
+    
     #check and log values
     
     send_at("AT+CSQ", "OK")
@@ -176,6 +178,8 @@ while True:
     send_at(HTTPACTION, 'OK', timeout=15)
     
     send_at(HTTPHEAD, 'OK', timeout=5)
+    
+    send_at("AT+HTTPTERM", 'OK', timeout=5)
     
     time.sleep(600)
     
